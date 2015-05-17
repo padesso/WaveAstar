@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="8" height="7" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="TestTileSet" tilewidth="18" tileheight="18">
+  <image source="tilesets/sceneTiles.png" width="306" height="306"/>
+  <tile id="39">
+   <properties>
+    <property name="PathFinderCost" value="-1"/>
+   </properties>
+  </tile>
+  <tile id="175">
+   <properties>
+    <property name="PathFinderCost" value="0"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Pathfinding" width="8" height="7">
+  <data encoding="base64" compression="zlib">
+   eJzbwMDAsIFIrAHFg1UeGwYAyRIhMQ==
+  </data>
+ </layer>
+</map>

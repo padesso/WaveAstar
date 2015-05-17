@@ -22,11 +22,10 @@ namespace AstarTestProject.Pathfinding
 
         #endregion
 
-
         #region Instance Fields
 
         private readonly int _pathfindingCost;
-        private readonly bool _passable = true;  //TODO: is it better to be passable by default or not?
+        private readonly bool _passable = true; 
 
         private int _f;
         private int _g;
@@ -57,7 +56,6 @@ namespace AstarTestProject.Pathfinding
         }
 
         #endregion
-
 
         #region Parameters
 

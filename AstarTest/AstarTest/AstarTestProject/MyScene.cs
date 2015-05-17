@@ -25,13 +25,8 @@ namespace AstarTestProject
 
         protected override void CreateScene()
         {
-            //Insert your scene definition here.
             CreateCamera();
             CreateTiledMap();
-
-            // Adds Mouse control. See MouseBehavior.cs for details.
-            //this.AddSceneBehavior(new MouseBehavior(), SceneBehavior.Order.PostUpdate);
-            //this.AddSceneBehavior(new PickingBehavior(), SceneBehavior.Order.PostUpdate);
         }
 
         private void CreateCamera()
@@ -45,7 +40,6 @@ namespace AstarTestProject
             var camera2DComponent = camera.Entity.FindComponent<Camera2D>();
             camera2DComponent.Zoom = Vector2.One / 1.5f;
             camera2DComponent.Position = new Vector3(400, 200, float.MaxValue);
-            //camera2DComponent.Rotation = .125f;
 
             this.AddSceneBehavior(new MouseBehavior(), SceneBehavior.Order.PostUpdate);
 
@@ -86,8 +80,6 @@ namespace AstarTestProject
             //Draw the path
             while (path.Count() > 0)
             {
-                //TODO:
-
                 Node tempNode = path.Pop();
 
                 Entity crateEntity = new Entity() { Tag = "path" }
@@ -97,9 +89,7 @@ namespace AstarTestProject
                  .AddComponent(new CircleCollider())
                  ;
 
-                this.EntityManager.Add(crateEntity);
-
-                
+                this.EntityManager.Add(crateEntity);  
             }
 
             Console.WriteLine("Testing Astar");

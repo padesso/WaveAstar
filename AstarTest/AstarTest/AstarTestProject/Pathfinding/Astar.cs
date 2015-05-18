@@ -1,10 +1,6 @@
-﻿using System.Runtime.Remoting.Messaging;
-using SD.Tools.Algorithmia.PriorityQueues;
+﻿using SD.Tools.Algorithmia.PriorityQueues;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WaveEngine.TiledMap;
 
 namespace AstarTestProject.Pathfinding
@@ -69,14 +65,14 @@ namespace AstarTestProject.Pathfinding
 
                 while (!_closedSet.Contains(_goalNode) && _openSet.Count > 0)
                 {
-                    Node currentNode = _openSet.Remove(); //Get the node with the lowest cost   
+                    Node currentNode = _openSet.Remove(); //Get the node with the lowest cost from the priority queue                    
 
                     List<Node> neighbors = Neighbors(currentNode, true);
                     Node bestNeighbor = neighbors[0];
 
                     foreach (Node currentNeighborNode in neighbors)
                     {
-                        //If it is not walkable or if it is on the closed list, ignore it.                      
+                        //If it is not passable or if it is on the closed list, ignore it.                      
                         if (!currentNeighborNode.Passable || _closedSet.Contains(currentNeighborNode))
                             continue;
 
@@ -85,7 +81,7 @@ namespace AstarTestProject.Pathfinding
                         {
                             currentNeighborNode.Parent = currentNode;
                             currentNeighborNode.H = ManhattanDistance(currentNeighborNode, _goalNode);  //F is calculated when setting G or H
-                            currentNeighborNode.G = currentNode.G + CalculateG(currentNode, currentNeighborNode);
+                            currentNeighborNode.G = CalculateG(currentNode, currentNeighborNode);
                             _openSet.Add(currentNeighborNode);
                         }
                         else //already on open set
@@ -237,7 +233,8 @@ namespace AstarTestProject.Pathfinding
         /// <summary>
         /// Find all of the neighbors of a given node and calculate the cost to navigate to the node.
         /// </summary>
-        /// <param name="node"></param>
+        /// <param name="node">The node to find the neighbors of</param>
+        /// <param name="allowDiagonals">Include square diagonal to the node?</param>
         /// <returns></returns>
         private List<Node> Neighbors(Node node, bool allowDiagonals)
         {
@@ -258,7 +255,7 @@ namespace AstarTestProject.Pathfinding
                         nodeNeighbors.Add(northWestNode);
                     }
 
-                    if (node.Y < _map.TileLayers[_pathfindingLayer].TiledMap.Height - 1 && allowDiagonals) //TODO: compare to _collisionNodes
+                    if (node.Y < _map.TileLayers[_pathfindingLayer].TiledMap.Height - 1 && allowDiagonals) 
                     {
                         //Check south west neighbor
                         Node southWestNode = _collisionNodes[node.X - 1, node.Y + 1];

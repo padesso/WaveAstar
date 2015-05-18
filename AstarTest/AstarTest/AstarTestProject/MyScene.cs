@@ -15,6 +15,7 @@ using WaveEngine.Framework.Resources;
 using WaveEngine.Framework.Services;
 using WaveEngine.TiledMap;
 using WaveEngine.Framework.Physics2D;
+using System.Diagnostics;
 #endregion
 
 namespace AstarTestProject
@@ -70,12 +71,14 @@ namespace AstarTestProject
         protected override void Start()
         {
             base.Start();
-            
+
             //Load the A* engine and tell it what layer to use for pathfinding
             Astar astar = new Astar(_tiledMap, "Pathfinding");
 
-            //Find your way from 0,0 to 19,19
-            Path path = astar.Solve(0,0,19,19);
+            Stopwatch sw = Stopwatch.StartNew();
+            Path path = astar.Solve(0, 0, 19, 19); //Find your way from 0,0 to 19,19
+            sw.Stop();
+            Console.WriteLine("Solved in: {0}ms", sw.Elapsed.TotalMilliseconds);
 
             //Draw the path
             while (path.Count() > 0)
